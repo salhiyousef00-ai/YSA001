@@ -107,7 +107,7 @@ export default function RequestDetail() {
                       <Body style={{ fontWeight: '700' }}>{t('quote.total')}</Body><Money cents={q.total_cents} size="h3" />
                     </Row>
                     <View style={{ gap: space.sm }}>
-                      {p ? <Button variant="ghost" title={t('profile.publicProfile')} onPress={() => router.push(`/provider/${q.provider_id}`)} /> : null}
+                      {p ? <Button variant="ghost" title={t('request.viewProfile')} onPress={() => router.push(`/provider/${q.provider_id}`)} /> : null}
                       {q.status === 'pending' && r.status === 'quoted' ? (
                         <Button title={t('request.accept')} loading={busy === q.id} onPress={() => accept(q)} />
                       ) : null}

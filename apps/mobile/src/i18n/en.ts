@@ -54,7 +54,7 @@ const en: Translation = {
     mine: 'My requests', quotes: 'Quotes received', noQuotes: 'No quotes yet. Verified providers in the area have been notified.',
     accept: 'Accept this quote', acceptConfirm: 'Accepting this quote creates the job. Other quotes will be declined.',
     cancel: 'Cancel request', available: 'Requests in your area', noAvailable: 'No open requests in your cities and services right now.',
-    yourQuote: 'Your quote', makeQuote: 'Send a quote', invalidDate: 'Expected date format: YYYY-MM-DD',
+    viewProfile: 'View profile', yourQuote: 'Your quote', makeQuote: 'Send a quote', invalidDate: 'Expected date format: YYYY-MM-DD',
   },
   quote: {
     new: 'Send a quote', message: 'Message to the client', milestones: 'Payment milestones',

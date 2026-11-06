@@ -54,7 +54,7 @@ const ar: Translation = {
     mine: 'طلباتي', quotes: 'العروض المستلمة', noQuotes: 'لا توجد عروض بعد. تم إشعار مقدمي الخدمات الموثَّقين في المنطقة.',
     accept: 'قبول هذا العرض', acceptConfirm: 'قبول هذا العرض ينشئ المهمة، وستُرفض العروض الأخرى.',
     cancel: 'إلغاء الطلب', available: 'طلبات في منطقتك', noAvailable: 'لا توجد طلبات مفتوحة في مدنك وخدماتك حاليًا.',
-    yourQuote: 'عرضك', makeQuote: 'تقديم عرض', invalidDate: 'صيغة التاريخ المطلوبة: YYYY-MM-DD',
+    viewProfile: 'عرض الملف', yourQuote: 'عرضك', makeQuote: 'تقديم عرض', invalidDate: 'صيغة التاريخ المطلوبة: YYYY-MM-DD',
   },
   quote: {
     new: 'تقديم عرض', message: 'رسالة إلى العميل', milestones: 'مراحل الدفع',

@@ -52,7 +52,7 @@ const fr = {
     mine: 'Mes demandes', quotes: 'Devis reçus', noQuotes: 'Pas encore de devis. Les prestataires vérifiés de la zone ont été informés.',
     accept: 'Accepter ce devis', acceptConfirm: 'Accepter ce devis crée la mission. Les autres devis seront refusés.',
     cancel: 'Annuler la demande', available: 'Demandes dans votre zone', noAvailable: 'Aucune demande ouverte dans vos villes et services pour le moment.',
-    yourQuote: 'Votre devis', makeQuote: 'Proposer un devis', invalidDate: 'Format de date attendu : AAAA-MM-JJ',
+    viewProfile: 'Voir le profil', yourQuote: 'Votre devis', makeQuote: 'Proposer un devis', invalidDate: 'Format de date attendu : AAAA-MM-JJ',
   },
   quote: {
     new: 'Proposer un devis', message: 'Message au client', milestones: 'Étapes de paiement',
