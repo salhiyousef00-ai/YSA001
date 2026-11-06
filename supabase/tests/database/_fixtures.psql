@@ -1,0 +1,43 @@
+create extension if not exists pgtap with schema extensions;
+set local search_path = public, extensions;
+-- Fixtures communes, incluses par chaque fichier de test (\ir) DANS la transaction du test.
+-- Ne dépend pas du seed : crée ses propres utilisateurs, ville et service.
+\set ADMIN    '''aaaaaaaa-0000-0000-0000-000000000001'''
+\set C1       '''aaaaaaaa-0000-0000-0000-0000000000c1'''
+\set C2       '''aaaaaaaa-0000-0000-0000-0000000000c2'''
+\set PV       '''aaaaaaaa-0000-0000-0000-0000000000f1'''
+\set PV2      '''aaaaaaaa-0000-0000-0000-0000000000f2'''
+\set PU       '''aaaaaaaa-0000-0000-0000-0000000000e1'''
+\set SVC      '''aaaaaaaa-0000-0000-0000-00000000005e'''
+
+\set as_admin 'set local role authenticated; set local request.jwt.claims = ''{"sub":"aaaaaaaa-0000-0000-0000-000000000001","role":"authenticated"}'';'
+\set as_c1    'set local role authenticated; set local request.jwt.claims = ''{"sub":"aaaaaaaa-0000-0000-0000-0000000000c1","role":"authenticated"}'';'
+\set as_c2    'set local role authenticated; set local request.jwt.claims = ''{"sub":"aaaaaaaa-0000-0000-0000-0000000000c2","role":"authenticated"}'';'
+\set as_pv    'set local role authenticated; set local request.jwt.claims = ''{"sub":"aaaaaaaa-0000-0000-0000-0000000000f1","role":"authenticated"}'';'
+\set as_pv2   'set local role authenticated; set local request.jwt.claims = ''{"sub":"aaaaaaaa-0000-0000-0000-0000000000f2","role":"authenticated"}'';'
+\set as_pu    'set local role authenticated; set local request.jwt.claims = ''{"sub":"aaaaaaaa-0000-0000-0000-0000000000e1","role":"authenticated"}'';'
+\set as_anon  'set local role anon; set local request.jwt.claims = ''{"role":"anon"}'';'
+\set as_root  'reset role; set local request.jwt.claims = '''';'
+
+insert into auth.users (id, email, aud, role) values
+  (:ADMIN, 't-admin@test.local', 'authenticated', 'authenticated'),
+  (:C1, 't-c1@test.local', 'authenticated', 'authenticated'),
+  (:C2, 't-c2@test.local', 'authenticated', 'authenticated'),
+  (:PV, 't-pv@test.local', 'authenticated', 'authenticated'),
+  (:PV2, 't-pv2@test.local', 'authenticated', 'authenticated'),
+  (:PU, 't-pu@test.local', 'authenticated', 'authenticated');
+
+update public.profiles set role = 'admin', onboarded = true where id = :ADMIN;
+update public.profiles set role = 'client', onboarded = true, full_name = 'Client ' || right(id::text, 2) where id in (:C1, :C2);
+update public.profiles set role = 'provider', onboarded = true where id in (:PV, :PV2, :PU);
+insert into public.client_profiles (user_id, residence_country) values (:C1, 'FR'), (:C2, 'BE');
+insert into public.provider_profiles (user_id, verification_status) values (:PV, 'verified'), (:PV2, 'verified'), (:PU, 'pending');
+
+insert into public.cities (slug, name_fr, name_ar, name_en) values ('testville', 'Testville', 'تست', 'Testville'), ('autreville', 'Autre', 'أخرى', 'Other');
+insert into public.services (id, slug, name_fr, name_ar, name_en) values (:SVC, 'test-service', 'Test', 'اختبار', 'Test');
+insert into public.provider_services (provider_id, service_id) values (:PV, :SVC), (:PV2, :SVC), (:PU, :SVC);
+insert into public.provider_cities (provider_id, city_id)
+  select p, (select id from public.cities where slug = 'testville') from unnest(array[:PV, :PU]::uuid[]) p;
+-- PV2 couvre une autre ville : ne doit pas voir les demandes de Testville
+insert into public.provider_cities (provider_id, city_id) values (:PV2, (select id from public.cities where slug = 'autreville'));
+update public.platform_settings set value = '0.15' where key = 'commission_rate';
