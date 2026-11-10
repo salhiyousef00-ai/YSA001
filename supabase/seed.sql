@@ -51,6 +51,18 @@ select '00000000-0000-0000-0000-000000000000', id, 'authenticated', 'authenticat
        '{"provider":"email","providers":["email"]}', '{}', '', '', '', ''
 from u on conflict (id) do nothing;
 
+-- GoTrue (Supabase hébergé) refuse la connexion si ces colonnes texte sont NULL
+-- (« Database error querying schema »). On les met à '' si elles existent.
+do $$
+declare c text;
+begin
+  foreach c in array array['email_change_token_current','phone_change','phone_change_token','reauthentication_token','email_change','email_change_token_new','confirmation_token','recovery_token'] loop
+    if exists (select 1 from information_schema.columns where table_schema = 'auth' and table_name = 'users' and column_name = c) then
+      execute format('update auth.users set %I = %L where %I is null and email like %L', c, '', c, '%@wasla.test');
+    end if;
+  end loop;
+end $$;
+
 insert into auth.identities (provider_id, user_id, identity_data, provider, last_sign_in_at)
 select id::text, id, jsonb_build_object('sub', id::text, 'email', email), 'email', now()
 from auth.users where email like '%@wasla.test' on conflict do nothing;
