@@ -45,10 +45,10 @@ with u(id, email, phone) as (values
   ('b0000000-0000-0000-0000-000000000004', 'hamza@wasla.test', '+212600000004'),
   ('b0000000-0000-0000-0000-000000000005', 'leila@wasla.test', '+212600000005'))
 insert into auth.users (instance_id, id, aud, role, email, phone, encrypted_password, email_confirmed_at,
-                        raw_app_meta_data, raw_user_meta_data, confirmation_token, recovery_token, email_change, email_change_token_new)
+                        raw_app_meta_data, raw_user_meta_data, confirmation_token, recovery_token, email_change, email_change_token_new, created_at, updated_at)
 select '00000000-0000-0000-0000-000000000000', id, 'authenticated', 'authenticated', email, phone,
        extensions.crypt('Wasla2026!', extensions.gen_salt('bf')), now(),
-       '{"provider":"email","providers":["email"]}', '{}', '', '', '', ''
+       '{"provider":"email","providers":["email"]}', '{}', '', '', '', '', now(), now()
 from u on conflict (id) do nothing;
 
 -- GoTrue (Supabase hébergé) refuse la connexion si ces colonnes texte sont NULL
@@ -63,8 +63,8 @@ begin
   end loop;
 end $$;
 
-insert into auth.identities (provider_id, user_id, identity_data, provider, last_sign_in_at)
-select id::text, id, jsonb_build_object('sub', id::text, 'email', email), 'email', now()
+insert into auth.identities (provider_id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+select id::text, id, jsonb_build_object('sub', id::text, 'email', email), 'email', now(), now(), now()
 from auth.users where email like '%@wasla.test' on conflict do nothing;
 
 update public.profiles p set role = v.role::public.user_role, full_name = v.name, locale = v.locale::public.app_locale, onboarded = true
