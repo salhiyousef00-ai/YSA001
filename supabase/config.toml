@@ -1,0 +1,73 @@
+# Configuration Supabase CLI (local). Voir https://supabase.com/docs/guides/local-development
+project_id = "wasla"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+major_version = 15
+
+[db.seed]
+enabled = true
+sql_paths = ["./seed.sql"]
+
+[realtime]
+enabled = true
+
+[studio]
+enabled = true
+port = 54323
+
+[inbucket]
+enabled = true
+port = 54324
+
+[storage]
+enabled = true
+file_size_limit = "100MiB"
+
+[auth]
+enabled = true
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["wasla://", "exp://127.0.0.1:8081"]
+jwt_expiry = 3600
+enable_refresh_token_rotation = true
+enable_signup = true
+
+[auth.email]
+enable_signup = true
+enable_confirmations = false
+otp_length = 6  # l’app accepte 6 à 8 chiffres
+otp_expiry = 600
+
+[auth.sms]
+# OTP SMS : activer et configurer un fournisseur (Twilio, MessageBird...) en production.
+enable_signup = true
+enable_confirmations = true
+template = "Wasla : votre code est {{ .Code }}"
+
+# En local, numéros de test (pas d'envoi réel) : code fixe 123456
+[auth.sms.test_otp]
+212600000001 = "123456"
+212600000099 = "123456"
+
+[auth.sms.twilio]
+enabled = false
+account_sid = ""
+message_service_sid = ""
+auth_token = "env(SUPABASE_AUTH_SMS_TWILIO_AUTH_TOKEN)"
+
+[edge_runtime]
+enabled = true
+policy = "per_worker"
+
+[functions.send-push]
+verify_jwt = false   # appelée par pg_net avec la clé service ; la fonction vérifie elle-même l'en-tête
+
+[functions.delete-account]
+verify_jwt = true
