@@ -1,4 +1,4 @@
-import { useLocalSearchParams } from 'expo-router';
+import { Redirect, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Banner, Button, Field, Screen, Title } from '@/components/ui';
@@ -11,6 +11,9 @@ export default function Verify() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [resent, setResent] = useState(false);
+
+  // Ouvert sans destinataire (lien profond, restauration d'état) : retour à la connexion.
+  if (!target || (mode !== 'email' && mode !== 'phone')) return <Redirect href="/(auth)/sign-in" />;
 
   const verify = async () => {
     setLoading(true); setError(null);
