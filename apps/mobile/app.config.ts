@@ -1,6 +1,8 @@
 import type { ExpoConfig } from 'expo/config';
 
 // Seules des valeurs PUBLIQUES (URL + clé anon) sont embarquées. Jamais la clé service.
+const projectId = process.env.EAS_PROJECT_ID;
+
 const config: ExpoConfig = {
   name: 'Wasla',
   slug: 'wasla',
@@ -37,12 +39,15 @@ const config: ExpoConfig = {
     ['expo-notifications', { color: '#0B5D3B' }],
     ['expo-image-picker', { photosPermission: 'Wasla accède à vos photos pour les documents et la messagerie.' }],
   ],
+  // EAS Update : permet d'ouvrir l'app dans Expo Go depuis les serveurs Expo (sans PC joignable).
+  runtimeVersion: { policy: 'sdkVersion' },
+  updates: projectId ? { url: `https://u.expo.dev/${projectId}` } : undefined,
   experiments: { typedRoutes: true },
   extra: {
     supportsRTL: true,
     supabaseUrl: process.env.EXPO_PUBLIC_SUPABASE_URL,
     supabaseAnonKey: process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY,
-    eas: { projectId: process.env.EAS_PROJECT_ID },
+    eas: { projectId },
   },
 };
 
