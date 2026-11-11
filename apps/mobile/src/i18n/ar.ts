@@ -20,7 +20,7 @@ const ar: Translation = {
     newAccountHint: 'ليس لديك حساب؟ أدخل بريدك الإلكتروني أو رقمك: يُنشأ حسابك تلقائيًا عند أول تسجيل دخول.',
     password: 'كلمة المرور', sendCode: 'استلام رمز', signIn: 'دخول',
     usePassword: 'الدخول بكلمة المرور', useOtp: 'استلام رمز بدلًا من ذلك',
-    verifyTitle: 'أدخل الرمز', verifySubtitle: 'أرسلنا رمزًا من 6 أرقام إلى {{target}}.',
+    verifyTitle: 'أدخل الرمز', verifySubtitle: 'أرسلنا رمز التحقق إلى {{target}}.',
     code: 'رمز التحقق', verify: 'تحقق', resend: 'إعادة إرسال الرمز',
     roleTitle: 'كيف ستستخدم وصلة؟',
     roleClient: 'أعيش خارج المغرب', roleClientDesc: 'أريد إنجاز خدمة في المغرب ومتابعة تقدمها.',

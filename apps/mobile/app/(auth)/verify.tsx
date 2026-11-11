@@ -34,10 +34,10 @@ export default function Verify() {
   return (
     <Screen>
       <Title sub={t('auth.verifySubtitle', { target })}>{t('auth.verifyTitle')}</Title>
-      <Field label={t('auth.code')} value={code} onChangeText={(v) => setCode(v.replace(/\D/g, '').slice(0, 6))}
-        keyboardType="number-pad" autoComplete="one-time-code" textContentType="oneTimeCode" maxLength={6} autoFocus />
+      <Field label={t('auth.code')} value={code} onChangeText={(v) => setCode(v.replace(/\D/g, '').slice(0, 8))}
+        keyboardType="number-pad" autoComplete="one-time-code" textContentType="oneTimeCode" maxLength={8} autoFocus />
       {error ? <Banner tone="danger" icon="alert-circle">{error}</Banner> : null}
-      <Button title={t('auth.verify')} onPress={verify} loading={loading} disabled={code.length !== 6} />
+      <Button title={t('auth.verify')} onPress={verify} loading={loading} disabled={code.length < 6} />
       <Button variant="ghost" title={t('auth.resend')} onPress={resend} disabled={resent} />
     </Screen>
   );

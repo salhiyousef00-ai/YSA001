@@ -20,7 +20,7 @@ const en: Translation = {
     newAccountHint: 'No account yet? Enter your email or phone number: your account is created automatically the first time you sign in.',
     password: 'Password', sendCode: 'Send me a code', signIn: 'Sign in',
     usePassword: 'Sign in with a password', useOtp: 'Get a code instead',
-    verifyTitle: 'Enter the code', verifySubtitle: 'We sent a 6-digit code to {{target}}.',
+    verifyTitle: 'Enter the code', verifySubtitle: 'We sent a verification code to {{target}}.',
     code: 'Verification code', verify: 'Verify', resend: 'Resend code',
     roleTitle: 'How will you use Wasla?',
     roleClient: 'I live abroad', roleClientDesc: 'I want to get a service done in Morocco and follow its progress.',

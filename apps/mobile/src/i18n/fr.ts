@@ -18,7 +18,7 @@ const fr = {
     newAccountHint: 'Pas encore de compte ? Saisissez votre e-mail ou votre numéro : votre compte est créé automatiquement à la première connexion.',
     password: 'Mot de passe', sendCode: 'Recevoir un code', signIn: 'Se connecter',
     usePassword: 'Se connecter avec un mot de passe', useOtp: 'Recevoir un code à la place',
-    verifyTitle: 'Saisissez le code', verifySubtitle: 'Nous avons envoyé un code à 6 chiffres à {{target}}.',
+    verifyTitle: 'Saisissez le code', verifySubtitle: 'Nous avons envoyé un code de vérification à {{target}}.',
     code: 'Code de vérification', verify: 'Vérifier', resend: 'Renvoyer le code',
     roleTitle: 'Comment allez-vous utiliser Wasla ?',
     roleClient: 'Je vis à l’étranger', roleClientDesc: 'Je veux confier un service au Maroc et suivre son avancement.',
