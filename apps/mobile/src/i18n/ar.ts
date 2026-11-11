@@ -17,6 +17,7 @@ const ar: Translation = {
     signInTitle: 'تسجيل الدخول',
     byEmail: 'البريد الإلكتروني', byPhone: 'الهاتف',
     email: 'البريد الإلكتروني', phone: 'رقم الهاتف', phoneHint: 'بالصيغة الدولية، مثال: ‎+33 6 12 34 56 78',
+    newAccountHint: 'ليس لديك حساب؟ أدخل بريدك الإلكتروني أو رقمك: يُنشأ حسابك تلقائيًا عند أول تسجيل دخول.',
     password: 'كلمة المرور', sendCode: 'استلام رمز', signIn: 'دخول',
     usePassword: 'الدخول بكلمة المرور', useOtp: 'استلام رمز بدلًا من ذلك',
     verifyTitle: 'أدخل الرمز', verifySubtitle: 'أرسلنا رمزًا من 6 أرقام إلى {{target}}.',

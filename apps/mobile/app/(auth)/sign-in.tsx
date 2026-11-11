@@ -1,7 +1,7 @@
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Banner, Button, Chip, Field, Row, Screen, Title } from '@/components/ui';
+import { Banner, Body, Button, Chip, Field, Row, Screen, Title } from '@/components/ui';
 import { currentLocale } from '@/i18n';
 import { supabase } from '@/lib/supabase';
 
@@ -51,6 +51,7 @@ export default function SignIn() {
   return (
     <Screen>
       <Title>{t('auth.signInTitle')}</Title>
+      {!usePassword ? <Body muted small>{t('auth.newAccountHint')}</Body> : null}
       <Row>
         <Chip label={t('auth.byEmail')} selected={mode === 'email'} onPress={() => setMode('email')} />
         <Chip label={t('auth.byPhone')} selected={mode === 'phone'} onPress={() => { setMode('phone'); setUsePassword(false); }} />

@@ -15,6 +15,7 @@ const fr = {
     signInTitle: 'Connexion',
     byEmail: 'E-mail', byPhone: 'Téléphone',
     email: 'Adresse e-mail', phone: 'Numéro de téléphone', phoneHint: 'Format international, ex. +33 6 12 34 56 78',
+    newAccountHint: 'Pas encore de compte ? Saisissez votre e-mail ou votre numéro : votre compte est créé automatiquement à la première connexion.',
     password: 'Mot de passe', sendCode: 'Recevoir un code', signIn: 'Se connecter',
     usePassword: 'Se connecter avec un mot de passe', useOtp: 'Recevoir un code à la place',
     verifyTitle: 'Saisissez le code', verifySubtitle: 'Nous avons envoyé un code à 6 chiffres à {{target}}.',

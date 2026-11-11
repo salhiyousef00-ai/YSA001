@@ -17,6 +17,7 @@ const en: Translation = {
     signInTitle: 'Sign in',
     byEmail: 'Email', byPhone: 'Phone',
     email: 'Email address', phone: 'Phone number', phoneHint: 'International format, e.g. +44 7700 900123',
+    newAccountHint: 'No account yet? Enter your email or phone number: your account is created automatically the first time you sign in.',
     password: 'Password', sendCode: 'Send me a code', signIn: 'Sign in',
     usePassword: 'Sign in with a password', useOtp: 'Get a code instead',
     verifyTitle: 'Enter the code', verifySubtitle: 'We sent a 6-digit code to {{target}}.',
