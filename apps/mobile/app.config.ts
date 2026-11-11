@@ -1,11 +1,13 @@
 import type { ExpoConfig } from 'expo/config';
 
 // Seules des valeurs PUBLIQUES (URL + clé anon) sont embarquées. Jamais la clé service.
-const projectId = process.env.EAS_PROJECT_ID;
+// Identifiant public du projet EAS (@ysalhi/wasla) — n'est pas un secret.
+const projectId = process.env.EAS_PROJECT_ID ?? 'c32c6d65-b5ee-441b-82b9-e6e14dc5cb30';
 
 const config: ExpoConfig = {
   name: 'Wasla',
   slug: 'wasla',
+  owner: 'ysalhi',
   scheme: 'wasla',
   version: '0.1.0',
   orientation: 'portrait',
